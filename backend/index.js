@@ -22,6 +22,6 @@ app.use(cors(corsOptions))
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
-app.listen(5000, ()=> console.log(`Your port is ${process.env.PORT}`));
+app.listen(5000, ()=> console.log(`Tourne sur le port : ${process.env.PORT} et l'environement: ${process.env.NODE_ENV} `));
 export default app
  
