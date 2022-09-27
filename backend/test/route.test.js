@@ -5,6 +5,27 @@ import router from "../routes/route"
 // const request = require('supertest')
 import app from "../index";
 
+describe('test environnement',()=>{
+
+    // beforeEach(() => {
+    //     initializeCityDatabase();
+    //   });
+
+
+it('affiche environnement dans lequel on se trouve, doit afficher test si test sinon production',()=>{
+    const env=process.env.NODE_ENV
+   if(env==='test'){
+expect(env).toEqual('test')
+console.log("environnement: test")
+}else{
+    expect(env).toEqual('production')
+console.log("environnement: production")
+}
+}
+)
+})
+
+
 describe('test sur register, sur login, sur token',()=>{
 describe('test rafraichissement token',()=>
 {
@@ -23,10 +44,10 @@ describe('enregister un nouvel user ', () => {
     });
     it('doit renvoyer un code 200,enregistrement avec succes ', async() => {
         const user = {
-            name: "test",
-            email:"test@test.fr",
-            password:"test",
-            confPassword:"test"
+            name: "toto",
+            email:"toto@toto.fr",
+            password:"toto",
+            confPassword:"toto"
         };
         const res =   await request(app)
           .post('/users').send(user)
@@ -55,8 +76,8 @@ describe('test sur login avec bons identifiants ', () => {
     });
     it('doit renvoyer status code 200, log avec succes ', async() => {
         const user = {
-            email:"celine@celine.fr",
-            password:"celine"
+            email:"toto@toto.fr",
+            password:"toto"
         };
         const res =   await request(app)
           .post('/login').send(user)
@@ -69,8 +90,8 @@ describe('test sur login avec mauvais email ', () => {
     });
     it('doit renvoyer status code 404, log echoué ', async() => {
         const user = {
-            email:"celin@celie.fr",
-            password:"celine"
+            email:"toto@testt.com",
+            password:"testt"
         };
         const res =   await request(app)
           .post('/login').send(user)
@@ -83,37 +104,53 @@ describe('test sur login avec mauvais mpd ', () => {
     });
     it('doit renvoyer status code 400, log echoué ', async() => {
         const user = {
-            email:"celine@celine.fr",
-            password:"celin"
+            email:"toto@toto.fr",
+            password:"test"
         };
         const res =   await request(app)
           .post('/login').send(user)
           expect(res.statusCode).toEqual(400)
     });
 });
-describe('logout  ', () => {
-    afterAll(async () => {
-        await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
-    });
-    it('doit renvoyer status code 204, sans contenu ', async() => {
-        const user = {
-            email:"celine@celine.fr",
-        };
-        const res =   await request(app)
-          .delete('/logout').send(user)
-          expect(res.statusCode).toEqual(204)
-          expect(res.body).toEqual({})
-    });
-    it('doit renvoyer ok et status 200',async()=>{
-        const user=
-        {
-            name:'u',
-            email:"u"
-        }
-        const res =   await request(app)
-        .delete('/logout').send(user)
-        expect(res.text).toEqual("")
-        expect(res.statusCode).toEqual(200)
-    })
-});
+// describe('logout  ', () => {
+//     afterAll(async () => {
+//         await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+//     });
+//     it('doit renvoyer status code 204, sans contenu ', async() => {
+//         const user = {
+//             email:"celine@celine.fr",
+//         };
+//         const res =   await request(app)
+//           .delete('/logout').send(user)
+//           expect(res.statusCode).toEqual(204)
+//           expect(res.body).toEqual({})
+//     });
+//     it('doit renvoyer ok et status 200',async()=>{
+//         const user=
+//         {
+//             name:'u',
+//             email:"u"
+//         }
+//         const res =   await request(app)
+//         .delete('/logout').send(user)
+//         expect(res.text).toEqual("")
+//         expect(res.statusCode).toEqual(200)
+//     })
+// });
+
+
+describe('test sur les if',()=>{
+
+    it('ajout 1+1 puis affiche 2 ok, si somme =2 sinon affiche pas égale à 2',()=>{
+        const somme=4+1;
+        if(somme===2 ){
+            expect(somme).toEqual(2)
+        console.log("2 ok");}
+        else {     expect(somme).not.toEqual(2)
+            console.log("pas égale a 2");}
+       
+
+    }
+    )
+})
 })

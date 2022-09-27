@@ -7,7 +7,6 @@ import router from "./routes/route.js";
 
 const app:any = express();
 
-
 const whitelist:string[] = ["http://localhost:3000"]
 const corsOptions = {
   origin: function (origin:any, callback:any) {
