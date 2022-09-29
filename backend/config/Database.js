@@ -38,7 +38,7 @@ deleteTable().then((result) => {
     }
 });
 
-  }
+   }
 
 export default db;
 

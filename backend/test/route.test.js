@@ -5,14 +5,11 @@ import router from "../routes/route"
 // const request = require('supertest')
 import app from "../index";
 
+
+
 describe('test environnement',()=>{
 
-    // beforeEach(() => {
-    //     initializeCityDatabase();
-    //   });
-
-
-it('affiche environnement dans lequel on se trouve, doit afficher test si test sinon production',()=>{
+ it('affiche environnement dans lequel on se trouve, doit afficher test si test sinon production',()=>{
     const env=process.env.NODE_ENV
    if(env==='test'){
 expect(env).toEqual('test')
@@ -36,6 +33,7 @@ it('doit retourner status 200', async()=>{
 const res=await request(app)
 .get('/token')
 expect(res.statusCode).toEqual(401)
+
 })
 })
 describe('enregister un nouvel user ', () => {
@@ -49,9 +47,12 @@ describe('enregister un nouvel user ', () => {
             password:"toto",
             confPassword:"toto"
         };
+        const mess="nouvel utilisateur"
         const res =   await request(app)
           .post('/users').send(user)
           expect(res.statusCode).toEqual(200)
+       
+         
     });
 });
 describe('enregister un nouvel user avec mdp qui match pas ', () => {
@@ -82,6 +83,7 @@ describe('test sur login avec bons identifiants ', () => {
         const res =   await request(app)
           .post('/login').send(user)
           expect(res.statusCode).toEqual(200)
+         
     });
 });
 describe('test sur login avec mauvais email ', () => {
@@ -112,31 +114,32 @@ describe('test sur login avec mauvais mpd ', () => {
           expect(res.statusCode).toEqual(400)
     });
 });
-// describe('logout  ', () => {
-//     afterAll(async () => {
-//         await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
-//     });
-//     it('doit renvoyer status code 204, sans contenu ', async() => {
-//         const user = {
-//             email:"celine@celine.fr",
-//         };
-//         const res =   await request(app)
-//           .delete('/logout').send(user)
-//           expect(res.statusCode).toEqual(204)
-//           expect(res.body).toEqual({})
-//     });
-//     it('doit renvoyer ok et status 200',async()=>{
-//         const user=
-//         {
-//             name:'u',
-//             email:"u"
-//         }
-//         const res =   await request(app)
-//         .delete('/logout').send(user)
-//         expect(res.text).toEqual("")
-//         expect(res.statusCode).toEqual(200)
-//     })
-// });
+describe('logout  ', () => {
+    afterAll(async () => {
+        await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+    });
+    // it('doit renvoyer status code 204, sans contenu ', async() => {
+    //     const user = {
+    //         email:"celine@celine.fr",
+    //     };
+    //     const res =   await request(app)
+    //       .delete('/logout').send(user)
+    //       expect(res.statusCode).toEqual(204)
+    //       expect(res.body).toEqual({})
+    // });
+    it('doit renvoyer ok et status 200',async()=>{
+      
+        const token={
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJ0b3RvIiwiZW1haWwiOiJ0b3RvQHRvdG8uZnIiLCJpYXQiOjE2NjQ0NDQ3NjQsImV4cCI6MTY2NDUzMTE2NH0.kiM35HZqMFfZTW295vTSU1uSQE9_txD9mloAoCCmgFE"
+        };
+       
+        const res =   await request(app)
+        .delete('/logout').send(token)
+         expect(res.body).toEqual({})
+        expect(res.statusCode).toEqual(204)
+
+    })
+});
 
 
 describe('test sur les if',()=>{
@@ -148,8 +151,6 @@ describe('test sur les if',()=>{
         console.log("2 ok");}
         else {     expect(somme).not.toEqual(2)
             console.log("pas égale a 2");}
-       
-
     }
     )
 })

@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import db from "./config/Database.js";
-import router from "./routes/route.js";
+import  router from "express"
+ 
 
 const app:any = express();
 

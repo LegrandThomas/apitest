@@ -1,5 +1,12 @@
 {
   "dependencies": {
     "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "@babel/preset-typescript": "^7.18.6",
+    "@tsconfig/node16": "^1.0.3"
   }
 }
