@@ -17,26 +17,26 @@ if (process.env.NODE_ENV !== 'test') {
                 dialect: "mysql",
                 logging : false
   });
-  const deleteTable = async () => {
-    try {
-        await db.query('DROP TABLE IF EXISTS users');  // sends queries
-        return true;
-    } 
-    catch (error) {
-        console.error(error.stack);
-        return false;
-    } 
-    finally {
-        console.log('La table users à bien était effacée et recréé avec succés');
-              return                   // closes connection
-    }
-};
+//   const deleteTable = async () => {
+//     try {
+//         await db.query('DROP TABLE IF EXISTS users');  // sends queries
+//         return true;
+//     } 
+//     catch (error) {
+//         console.error(error.stack);
+//         return false;
+//     } 
+//     finally {
+//         console.log('La table users à bien était effacée et recréé avec succés');
+//               return                   // closes connection
+//     }
+// };
 
-deleteTable().then((result) => {
-    if (result) {
-        console.log('Table deleted');
-    }
-});
+// deleteTable().then((result) => {
+//     if (result) {
+//         console.log('Table deleted');
+//     }
+// });
 
    }
 

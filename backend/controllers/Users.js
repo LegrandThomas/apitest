@@ -41,11 +41,13 @@ export const Login = async(req, res) => {
         const name = user[0].name;
         const email = user[0].email;
         const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '15s'
+            expiresIn: '120s'
         });
         const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
             expiresIn: '1d'
         });
+
+     
         await Users.update({refresh_token: refreshToken},{
             where:{
                 id: userId
@@ -56,6 +58,7 @@ export const Login = async(req, res) => {
             maxAge: 24 * 60 * 60 * 1000
         });
         res.json({ accessToken });
+        
     } catch (error) {
         res.status(404).json({msg:"Email introuvable"});
     }
@@ -69,6 +72,7 @@ export const Logout = async(req, res) => {
             refresh_token: refreshToken
         }
     });
+   
     if(!user[0]) return res.sendStatus(204);
   
     const userId = user[0].id;
@@ -80,3 +84,4 @@ export const Logout = async(req, res) => {
     res.clearCookie('refreshToken');
     return res.sendStatus(200);
 }
+
