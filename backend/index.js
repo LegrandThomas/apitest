@@ -23,17 +23,25 @@ app.use(cors(corsOptions))
 app.use(cookieParser());
 app.use(express.json());
 
-app.get('/setcookie', (req, res) => {
-  res.cookie(`Cookie token name`,`encrypted cookie string Value`,{
-      maxAge: 5000,
-      // expires works the same as the maxAge
-      expires: new Date('01 12 2021'),
-      secure: true,
-      httpOnly: true,
-      sameSite: 'lax'
-  });
-  res.send('Cookie have been saved successfully');
+// app.get('/setcookie', (req, res) => {
+//   res.cookie(`Nom du cookie`,`+ les valeurs encrypter aprés`,{
+//       maxAge: 5000,
+//       // expires works the same as the maxAge
+//       expires: new Date('01 12 2021'),
+//       // secure: true,
+//       // httpOnly: true,
+//       sameSite: 'lax'
+//   });
+//    console.log(req.cookies);
+//   res.send('Cookie have been saved successfully');
+  
 
+// });
+
+app.get('/getcookie', (req, res) => {
+  //show the saved cookies
+  console.log(req.cookies)
+  res.send(req.cookies);
 });
 
 app.use(router);

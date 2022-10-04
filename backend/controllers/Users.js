@@ -46,9 +46,9 @@ export const Login = async(req, res) => {
         const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
             expiresIn: '1d'
         });
-
-     
-        await Users.update({refresh_token: refreshToken},{
+        console.log(accessToken);
+     console.log(refreshToken);
+             await Users.update({refresh_token: refreshToken},{
             where:{
                 id: userId
             }

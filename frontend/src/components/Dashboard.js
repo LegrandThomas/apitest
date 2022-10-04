@@ -39,12 +39,14 @@ const Dashboard = () => {
             const response = await axios.get('http://localhost:5000/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
+            console.log(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken);
             console.log(decoded);
             setName(decoded.name);
             setExpire(decoded.exp);
         }
         console.log(config)
+        
         return config;
     }, (error) => {
         return Promise.reject(error);
